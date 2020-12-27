@@ -248,17 +248,17 @@ upgrade_ytdl() {
 
 finishing_touches() {
 sudo touch /etc/ld.so.conf
-sudo mkdir -p /etc/environment.d/
-sudo touch /etc/environment.d/10-codecs.conf
+sudo mkdir -p /etc/ld.so.conf.d/
+sudo touch /etc/ld.so.conf.d/10-codecs.conf
 touch ${HOME}/.config/firefox.conf
-if ! grep -q /usr/local/lib /etc/ld.so.conf; then
-  echo /usr/local/lib | sudo tee -a /etc/ld.so.conf
+if ! grep -q ""include /etc/ld.so.conf.d/*.conf"" /etc/ld.so.conf; then
+  echo "include /etc/ld.so.conf.d/*.conf" | sudo tee -a /etc/ld.so.conf
 fi
-if ! grep -q /usr/local/lib64 /etc/ld.so.conf; then
-  echo /usr/local/lib64 | sudo tee -a /etc/ld.so.conf
+if ! grep -q /usr/local/lib /etc/ld.so.conf.d/10-codecs.conf; then
+  echo /usr/local/lib | sudo tee -a /etc/ld.so.conf.d/10-codecs.conf
 fi
-if ! grep -q "LD_LIBRARY_PATH=/usr/local/lib64:/usr/local/lib" /etc/environment.d/10-codecs.conf; then
-  echo LD_LIBRARY_PATH=/usr/local/lib64:/usr/local/lib | sudo tee -a /etc/environment.d/10-codecs.conf
+if ! grep -q /usr/local/lib64 /etc/ld.so.conf.d/10-codecs.conf; then
+  echo /usr/local/lib64 | sudo tee -a /etc/ld.so.conf.d/10-codecs.conf
 fi
 if ! grep -q "export LD_LIBRARY_PATH=/usr/local/lib:/usr/local/lib64" ${HOME}/.config/firefox.conf; then
   echo "export LD_LIBRARY_PATH=/usr/local/lib:/usr/local/lib64" >> ${HOME}/.config/firefox.conf
