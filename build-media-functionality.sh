@@ -109,7 +109,7 @@ vpx() {
 }
 
 ffmpeg() {
-  rm -rf ffmpeg
+  rm -rf ffmpeg-4.3.1
   if [ ! -f "ffmpeg-4.3.1.tar.bz2" ]; then
     wget https://ffmpeg.org/releases/ffmpeg-4.3.1.tar.bz2
   fi
