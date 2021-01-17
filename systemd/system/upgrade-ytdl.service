@@ -1,0 +1,6 @@
+[Unit]
+Description=Upgrade YoutubeDl
+Wants=network-online.target
+After=network-online.target
+[Service]
+ExecStart=/usr/bin/pip install --upgrade youtube_dl

@@ -1,0 +1,9 @@
+[Unit]
+Description=Upgrade YoutubeDl weekly
+
+[Timer]
+OnCalendar=Fri 14:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target

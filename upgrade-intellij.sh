@@ -2,13 +2,14 @@
 
 #jre=-no-jbr
 jre=""
-ver=$(lynx -dump https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=intellij-idea-community-edition-no-jre | grep pkgver=)
-dlLink=https://download.jetbrains.com/idea/ideaIC-${ver:7}$jre.tar.gz
-file=ideaIC-${ver:7}$jre.tar.gz
+pkgver=$(curl https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=intellij-idea-ce | rg 'pkgver=' | cut -d '=' -f2)
+file=ideaIC-${pkgver}${jre}.tar.gz
+dlLink=https://download.jetbrains.com/idea/${file}
+
 dlDir=/tmp/intellij_download
 iJdir=/opt/intelliJ/
 
-if ! grep -q $dlLink /opt/intelliJ/version.txt; then
+if ! rg -q $pkgver /opt/intelliJ/version.txt; then
   echo New intelliJ Version. Upgrading...
   mkdir $dlDir && cd $dlDir
   echo -e $dlLink'\n'"$dlLink".sha256 | aria2c -i -
@@ -16,8 +17,8 @@ if ! grep -q $dlLink /opt/intelliJ/version.txt; then
     sudo tar xf $file -C /opt/ && \
     sudo rm -rf $iJdir && \
     sudo mv /opt/idea-IC* $iJdir && \
-    printf $dlLink > version.txt && \
-    sudo mv version.txt $iJdir
+    echo "New Version is "
+    echo $pkgver | sudo tee ${iJdir}/version.txt && \
     rm -rf $dlDir
   else
     rm -rf $dlDir
