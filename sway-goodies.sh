@@ -105,6 +105,8 @@ build_foot() {
 #build_foot
 #build_ydotool
 #build_wofi
+#make_build microbright https://github.com/blossfeldt/microbright.git
+#make_build microbat https://github.com/blossfeldt/microbat.git
 #make_build pamixer https://github.com/cdemoulins/pamixer.git
 #OPTS="ENABLE_SYSTEMD=1" INSTALL="INSTALL_UDEV_RULES=0" make_build brightnessctl https://github.com/Hummer12007/brightnessctl.git
 #OPTS="clients wayland" make_build bemenu https://github.com/Cloudef/bemenu.git
